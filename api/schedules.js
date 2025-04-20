@@ -1,5 +1,5 @@
 export default function handler(req, res) {
-    if (req.method === 'GET') {
+    if (req.method === 'POST') {
       res.status(200).json([
         { id: 1, nome: 'Agendamento A', horario: '09:00' },
         { id: 2, nome: 'Agendamento B', horario: '11:00' },
