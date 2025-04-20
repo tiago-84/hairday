@@ -1,21 +1,22 @@
 import dayjs from "dayjs"
-import {apiConfig} from "./api-config"
 
-export async function scheduleFetchByDay({date}){
-    try{
-        //Fazendo a requisição
-        const response = await fetch(`${apiConfig.baseURL}/schedules`)
+export async function scheduleFetchByDay({ date }) {
+  try {
+    // Fazendo a requisição diretamente
+    const response = await fetch(`/api/schedules`)
 
-        //Converte para JSON
-        const data = await response.json()
+    // Converte para JSON
+    const data = await response.json()
 
-        //Filtra os agendamentos pelo dia selecionado.
-        const dailySchedules = data.filter((schedule) =>
-            dayjs(date).isSame(schedule.when, "day"))
+    // Filtra os agendamentos pelo dia selecionado.
+    const dailySchedules = data.filter((schedule) =>
+      dayjs(date).isSame(schedule.when, "day")
+    )
 
-        return dailySchedules
-    }catch(error){
-        console.log(error)
-        return alert("Não foi possivel busca os agendamentos do dia selecionado.")
-    }
+    return dailySchedules
+  } catch (error) {
+    console.log(error)
+    alert("Não foi possível buscar os agendamentos do dia selecionado.")
+    return []
+  }
 }
