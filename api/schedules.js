@@ -1,12 +1,16 @@
-export default function handler(req, res) {
-    if (req.method === 'POST') {
-      res.status(200).json([
-        { id: 1, nome: 'Agendamento A', horario: '09:00' },
-        { id: 2, nome: 'Agendamento B', horario: '11:00' },
-        { id: 3, nome: 'Agendamento C', horario: '15:00' },
-      ]);
-    } else {
-      res.status(405).json({ message: 'Method Not Allowed' });
-    }
+let schedules = [];
+
+export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    return res.status(200).json(schedules);
   }
-  
+
+  if (req.method === 'POST') {
+    const { id, name, when } = req.body;
+    const newSchedule = { id, name, when };
+    schedules.push(newSchedule);
+    return res.status(201).json(newSchedule);
+  }
+
+  return res.status(405).end();
+}
