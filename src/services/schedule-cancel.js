@@ -1,6 +1,6 @@
 export async function scheduleCancel({ id }) {
     try {
-      await fetch(`/api/schedules/${id}`, {
+      await fetch(`/api/schedules/[id]/${id}`, {
         method: 'DELETE',
       });
   
